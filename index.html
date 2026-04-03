@@ -832,7 +832,7 @@
         <div><div class="cv-role">Reviewer — ACS Journals</div><div class="cv-org">Nano Letters</div></div>
       </div>
     </div>
-
+  </div> 
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
   <!-- CONTACT -->
@@ -903,33 +903,20 @@
     document.getElementById('icon-sun').style.display = 'none';
     document.getElementById('icon-moon').style.display = '';
   }
-
-  // PHOTO UPLOAD
-  const photoInput = document.getElementById('photo-input');
+	
+  // GITHUB PHOTO
   const photoImg = document.getElementById('photo-img');
   const photoPlaceholder = document.getElementById('photo-placeholder');
 
-  // Restore saved photo
-  const savedPhoto = localStorage.getItem('profile-photo');
-  if (savedPhoto) {
-    photoImg.src = savedPhoto;
+  if (typeof GITHUB_PHOTO_URL !== 'undefined' && GITHUB_PHOTO_URL.trim() !== '') {
+    photoImg.src = GITHUB_PHOTO_URL;
     photoImg.style.display = 'block';
     photoPlaceholder.style.display = 'none';
+  } else {
+    photoImg.style.display = 'none';
+    photoPlaceholder.style.display = 'flex';
   }
 
-  photoInput.addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = function(ev) {
-      const dataUrl = ev.target.result;
-      photoImg.src = dataUrl;
-      photoImg.style.display = 'block';
-      photoPlaceholder.style.display = 'none';
-      try { localStorage.setItem('profile-photo', dataUrl); } catch(err) {}
-    };
-    reader.readAsDataURL(file);
-  });
 
   switchTab('about');
 </script>
