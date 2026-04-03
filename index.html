@@ -1,1 +1,937 @@
-<h1>Hello World</h1>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Supratik Sarkar — Quantum Physicist & Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    [data-theme="dark"] {
+      --bg:            #09090b;
+      --surface:       #111115;
+      --surface-2:     #1a1a20;
+      --border:        rgba(255,255,255,0.07);
+      --border-strong: rgba(255,255,255,0.15);
+      --text:          #e2e2e8;
+      --text-2:        #8888a8;
+      --text-3:        #50506a;
+      --accent:        #a78bfa;
+      --accent-warm:   #fbbf24;
+      --accent-dim:    rgba(167,139,250,0.10);
+      --accent-dim2:   rgba(167,139,250,0.20);
+      --nav-bg:        rgba(9,9,11,0.88);
+      --tag-bg:        rgba(167,139,250,0.10);
+      --tag-text:      #c4b5fd;
+      --dot:           rgba(255,255,255,0.05);
+      --glow:          rgba(167,139,250,0.06);
+      --photo-bg:      #1a1a20;
+    }
+
+    [data-theme="light"] {
+      --bg:            #f4f3ef;
+      --surface:       #ffffff;
+      --surface-2:     #eeede8;
+      --border:        rgba(0,0,0,0.08);
+      --border-strong: rgba(0,0,0,0.16);
+      --text:          #19191f;
+      --text-2:        #58587a;
+      --text-3:        #9898b8;
+      --accent:        #6d28d9;
+      --accent-warm:   #b45309;
+      --accent-dim:    rgba(109,40,217,0.08);
+      --accent-dim2:   rgba(109,40,217,0.16);
+      --nav-bg:        rgba(244,243,239,0.90);
+      --tag-bg:        rgba(109,40,217,0.08);
+      --tag-text:      #5b21b6;
+      --dot:           rgba(0,0,0,0.055);
+      --glow:          rgba(109,40,217,0.05);
+      --photo-bg:      #e8e7e2;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      font-size: 14px;
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+      background-size: 26px 26px;
+      pointer-events: none; z-index: 0;
+    }
+    .glow-orb {
+      position: fixed; top: -200px; left: -200px;
+      width: 580px; height: 580px;
+      background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .nav-inner {
+      max-width: 980px; margin: 0 auto; padding: 0 2rem;
+      height: 60px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic; font-size: 18px;
+      color: var(--text); text-decoration: none; cursor: pointer;
+    }
+    .nav-logo span { font-style: normal; color: var(--accent); }
+    .theme-toggle {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--surface); border: 1px solid var(--border-strong);
+      color: var(--text-2); display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .theme-toggle:hover { color: var(--text); background: var(--surface-2); }
+    .theme-toggle svg { width: 15px; height: 15px; }
+
+    /* WRAPPER */
+    .wrapper { max-width: 980px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+
+    /* HERO */
+    .hero-section { padding: 136px 0 80px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 240px;
+      gap: 4rem; align-items: start;
+    }
+    @media (max-width: 700px) { .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    .hero-chip {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.4rem;
+    }
+    .hero-chip::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
+    .hero-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(44px, 6vw, 76px); font-weight: 700;
+      line-height: 1.03; letter-spacing: -0.025em;
+      color: var(--text); margin-bottom: 0.2em;
+    }
+    .hero-name em { font-style: italic; color: var(--accent); }
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(12px, 1.8vw, 15px); font-weight: 400;
+      color: var(--text-2); margin-bottom: 1.6rem; line-height: 1.6;
+    }
+    .hero-title strong { color: var(--text); font-weight: 700; }
+    .hero-bio { max-width: 560px; font-size: 13.5px; color: var(--text-2); line-height: 1.9; margin-bottom: 2rem; }
+    .hero-bio a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim2); transition: border-color 0.2s; }
+    .hero-bio a:hover { border-color: var(--accent); }
+    .hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2.8rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 20px; border-radius: 5px;
+      font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.05em;
+      text-decoration: none; cursor: pointer; border: none; transition: all 0.18s;
+    }
+    .btn-primary { background: var(--accent); color: #fff; font-weight: 500; }
+    .btn-primary:hover { opacity: 0.87; }
+    .btn-ghost { background: transparent; color: var(--text-2); border: 1px solid var(--border-strong); }
+    .btn-ghost:hover { color: var(--text); background: var(--surface-2); }
+    .hero-stats {
+      display: flex; gap: 2.5rem; flex-wrap: wrap;
+      padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .stat-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); margin-bottom: 3px; }
+    .stat-value { font-family: 'Playfair Display', Georgia, serif; font-size: 24px; font-weight: 700; color: var(--text); }
+
+    /* PHOTO CARD */
+    .photo-card {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--photo-bg);
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-start;
+      position: relative;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .photo-card img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top center;
+      display: block;
+    }
+    .photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 12px;
+      color: var(--text-3);
+    }
+    .photo-placeholder svg { width: 48px; height: 48px; opacity: 0.4; }
+    .photo-placeholder-text { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.5; text-align: center; padding: 0 1rem; }
+    .photo-upload-hint {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: var(--accent); color: #fff;
+      font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+      text-align: center; padding: 8px;
+      opacity: 0; transition: opacity 0.2s; cursor: pointer;
+    }
+    .photo-card:hover .photo-upload-hint { opacity: 1; }
+    #photo-input { display: none; }
+
+    /* TABS */
+    .tabs-wrap {
+      position: sticky; top: 60px; z-index: 100;
+      background: var(--nav-bg); border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      transition: background 0.3s;
+    }
+    .tabs-inner {
+      max-width: 980px; margin: 0 auto; padding: 0 2rem;
+      display: flex; overflow-x: auto; scrollbar-width: none;
+    }
+    .tabs-inner::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      padding: 0 1.2rem; height: 48px;
+      font-family: 'DM Mono', monospace; font-size: 11px;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      color: var(--text-3); background: transparent;
+      border: none; border-bottom: 2px solid transparent;
+      cursor: pointer; white-space: nowrap;
+      transition: color 0.18s, border-color 0.18s;
+    }
+    .tab-btn:hover { color: var(--text-2); }
+    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    /* PANELS */
+    .panel { display: none; padding: 68px 0 100px; }
+    .panel.active { display: block; }
+
+    /* SECTION HEADS */
+    .sec-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-3); margin-bottom: 0.5rem; }
+    .sec-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(24px, 4vw, 36px); font-weight: 700;
+      letter-spacing: -0.02em; line-height: 1.15;
+      color: var(--text); margin-bottom: 2.5rem;
+    }
+    .sec-title em { font-style: italic; color: var(--accent); }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 4rem; align-items: start; }
+    @media (max-width: 640px) { .about-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .about-body p { color: var(--text-2); line-height: 1.9; margin-bottom: 1.2rem; font-size: 14px; }
+    .about-body p:last-child { margin-bottom: 0; }
+    .side-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.4rem;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .side-card + .side-card { margin-top: 1rem; }
+    .side-card-title { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); margin-bottom: 1rem; }
+    .affil-item { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--border); }
+    .affil-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .affil-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+    .affil-name { font-size: 13px; color: var(--text); font-weight: 500; }
+    .affil-role { font-size: 12px; color: var(--text-3); }
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1.4rem; }
+    .tag { display: inline-block; padding: 4px 11px; border-radius: 4px; background: var(--tag-bg); color: var(--tag-text); font-size: 11px; letter-spacing: 0.04em; transition: background 0.2s; }
+    .tag:hover { background: var(--accent-dim2); }
+
+    /* CARDS */
+    .card-list { display: flex; flex-direction: column; gap: 1.2rem; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.5rem 1.6rem;
+      transition: border-color 0.2s, background 0.3s;
+    }
+    .card:hover { border-color: var(--border-strong); }
+    .card-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 0.5rem; flex-wrap: wrap; }
+    .card-year { font-size: 11px; color: var(--text-3); letter-spacing: 0.06em; }
+    .badge { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 9px; border-radius: 4px; }
+    .badge-accent { background: var(--tag-bg); color: var(--tag-text); }
+    .badge-warm { background: rgba(251,191,36,0.10); color: var(--accent-warm); }
+    .badge-green { background: rgba(34,197,94,0.10); color: #4ade80; }
+    .badge-blue { background: rgba(59,130,246,0.10); color: #60a5fa; }
+    .card-title { font-family: 'Playfair Display', Georgia, serif; font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.35rem; }
+    .card-sub { font-size: 12px; color: var(--text-3); margin-bottom: 0.75rem; }
+    .card-desc { font-size: 13px; color: var(--text-2); line-height: 1.8; margin-bottom: 1rem; }
+    .card-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .clink { font-size: 11px; letter-spacing: 0.05em; color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim2); padding-bottom: 1px; transition: border-color 0.2s; }
+    .clink:hover { border-color: var(--accent); }
+
+    /* ROW LISTS */
+    .row-list { display: flex; flex-direction: column; }
+    .row {
+      display: grid; grid-template-columns: 64px 1fr;
+      gap: 1.4rem; padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border); align-items: start;
+    }
+    .row:first-child { border-top: 1px solid var(--border); }
+    @media (max-width: 580px) { .row { grid-template-columns: 1fr; gap: 0.3rem; } }
+    .row-key { font-size: 11px; color: var(--text-3); padding-top: 3px; letter-spacing: 0.04em; line-height: 1.5; }
+    .row-title { font-family: 'Playfair Display', Georgia, serif; font-size: 16px; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.3rem; }
+    .row-authors { font-size: 12px; color: var(--text-3); margin-bottom: 0.25rem; }
+    .row-authors strong { color: var(--text); }
+    .row-venue { font-size: 12px; color: var(--accent-warm); font-style: italic; margin-bottom: 0.5rem; }
+    .row-meta { font-size: 12px; color: var(--text-3); margin-bottom: 0.4rem; }
+    .row-desc { font-size: 13px; color: var(--text-2); line-height: 1.8; }
+    .row-links { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.55rem; }
+    .featured-note { font-size: 11px; color: #4ade80; margin-top: 3px; }
+
+    /* CV */
+    .cv-banner {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.2rem 1.6rem;
+      margin-bottom: 3rem; gap: 1rem; flex-wrap: wrap;
+      transition: background 0.3s;
+    }
+    .cv-banner-text { font-size: 13px; color: var(--text-2); }
+    .cv-banner-text strong { color: var(--text); }
+    .cv-sec { margin-bottom: 2.8rem; }
+    .cv-sec-title { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-3); margin-bottom: 0.8rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--border); }
+    .cv-row { display: grid; grid-template-columns: 130px 1fr; gap: 1.4rem; padding: 0.9rem 0; border-bottom: 1px solid var(--border); align-items: start; }
+    .cv-row:last-child { border-bottom: none; }
+    @media (max-width: 580px) { .cv-row { grid-template-columns: 1fr; gap: 0.2rem; } }
+    .cv-period { font-size: 11px; color: var(--text-3); padding-top: 2px; }
+    .cv-role { font-size: 14px; color: var(--text); font-weight: 500; margin-bottom: 2px; }
+    .cv-org { font-size: 12px; color: var(--accent); margin-bottom: 3px; }
+    .cv-detail { font-size: 12px; color: var(--text-3); line-height: 1.7; }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    @media (max-width: 560px) { .contact-grid { grid-template-columns: 1fr; } }
+    .contact-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.2rem 1.4rem;
+      text-decoration: none; display: flex; align-items: center; gap: 14px;
+      transition: border-color 0.2s, background 0.3s;
+    }
+    .contact-card:hover { border-color: var(--border-strong); background: var(--surface-2); }
+    .c-icon { width: 38px; height: 38px; border-radius: 8px; background: var(--accent-dim); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--accent); }
+    .c-icon svg { width: 17px; height: 17px; }
+    .c-label { font-size: 10px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--text-3); margin-bottom: 2px; }
+    .c-value { font-size: 13px; color: var(--text); }
+    .contact-note { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 1.2rem 1.4rem; font-size: 13px; color: var(--text-2); line-height: 1.85; transition: background 0.3s; }
+
+    /* MEDIA */
+    .media-list { display: flex; flex-direction: column; gap: 0.8rem; }
+    .media-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1rem 1.2rem;
+      display: flex; align-items: flex-start; gap: 12px;
+      transition: border-color 0.2s, background 0.3s;
+    }
+    .media-item:hover { border-color: var(--border-strong); }
+    .media-num { font-size: 11px; color: var(--text-3); padding-top: 2px; min-width: 20px; }
+    .media-text { font-size: 13px; color: var(--text-2); line-height: 1.7; }
+    .media-text a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim2); }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 2rem 0; position: relative; z-index: 1; }
+    .footer-inner { max-width: 980px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .footer-copy { font-size: 12px; color: var(--text-3); }
+    .footer-copy span { color: var(--accent); }
+  </style>
+</head>
+<body>
+<div class="glow-orb"></div>
+<input type="file" id="photo-input" accept="image/*" />
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo" onclick="scrollTop()" style="cursor:pointer;">Supratik <span>Sarkar</span></span>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+      <svg id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+<!-- HERO -->
+<div class="wrapper">
+  <section class="hero-section">
+    <div class="hero-grid">
+      <div>
+        <p class="hero-chip">Photonic Integrated Circuits · Quantum Information</p>
+        <h1 class="hero-name">Supratik <em>Sarkar</em></h1>
+        <p class="hero-title">
+          <strong>PhD Candidate</strong> · Joint Quantum Institute, University of Maryland
+        </p>
+        <p class="hero-bio">
+          I work at the intersection of photonics, quantum optics, and condensed matter physics — probing exotic quantum phases of matter and engineering photonic systems for quantum information and computing. Based at the <a href="https://jqi.umd.edu/" target="_blank">Joint Quantum Institute</a>, College Park, MD.
+        </p>
+        <div class="hero-ctas">
+          <a href="https://scholar.google.com/citations?user=IVfoTFgAAAAJ&hl=en" target="_blank" class="btn btn-primary">Google Scholar →</a>
+          <button class="btn btn-ghost" onclick="switchTab('publications')">Publications ↓</button>
+          <button class="btn btn-ghost" onclick="switchTab('contact')">Contact ↓</button>
+        </div>
+		<!--
+		<div class="hero-stats">
+          <div><div class="stat-label">Publications</div><div class="stat-value">7</div></div>
+          <div><div class="stat-label">Under Review</div><div class="stat-value">4</div></div>
+          <div><div class="stat-label">Patents</div><div class="stat-value">3</div></div>
+          <div><div class="stat-label">Conf. Talks</div><div class="stat-value">10</div></div>
+        </div>
+		-->
+      </div>
+
+      <!-- PHOTO -->
+      <div>
+        <div class="photo-card" id="photo-card">
+          <img
+            id="photo-img"
+            src="https://raw.githubusercontent.com/SupratikSarkar/SupratikSarkar.github.io/main/path/to/your-photo.jpg"
+            alt="Supratik Sarkar"
+            onerror="this.style.display='none'; document.getElementById('photo-placeholder').style.display='flex';"
+          />
+          <div class="photo-placeholder" id="photo-placeholder" style="display:none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <span class="photo-placeholder-text">Set your GitHub image URL in the HTML</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+<!-- TABS -->
+<div class="tabs-wrap" id="tabs-bar">
+  <div class="tabs-inner">
+    <button class="tab-btn active" onclick="switchTab('about')">About</button>
+    <button class="tab-btn" onclick="switchTab('research')">Research</button>
+    <button class="tab-btn" onclick="switchTab('publications')">Publications</button>
+    <button class="tab-btn" onclick="switchTab('patents')">Patents</button>
+    <button class="tab-btn" onclick="switchTab('talks')">Talks</button>
+    <button class="tab-btn" onclick="switchTab('cv')">CV</button>
+    <button class="tab-btn" onclick="switchTab('contact')">Contact</button>
+  </div>
+</div>
+
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+<!-- PANELS -->
+<div class="wrapper">
+
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+  <!-- ABOUT -->
+  <div class="panel active" id="panel-about">
+    <p class="sec-label">Background</p>
+    <h2 class="sec-title">Who I <em>Am</em></h2>
+    <div class="about-grid">
+      <div class="about-body">
+        <p>I am a PhD candidate at the <a href="https://jqi.umd.edu/" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-dim2);">Joint Quantum Institute</a>, University of Maryland, working under the supervision of Prof. Mohammad Hafezi. My research lies at the intersection of quantum optics, nanophotonics, and condensed matter physics.</p>
+        <p>Previously, I completed my MASc in Electrical and Computer Engineering (Quantum Information) at the <a href="https://uwaterloo.ca/institute-for-quantum-computing/" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-dim2);">Institute for Quantum Computing</a>, University of Waterloo, where I worked with Prof. Michal Bajcsy on creating and shaping light at the single-photon level. Before that, I completed my undergraduate in Electronics and Telecommunication Engineering from <a href="https://jadavpuruniversity.in/" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-dim2);">Jadavpur University</a>, India.</p>
+        <div class="tag-cloud">
+          <span class="tag">Photonic Integrated Circuits</span>
+		  <span class="tag">Nonlinear Optics</span>
+		  <span class="tag">Condensed Matter Physics</span>
+          <span class="tag">Quantum Optics</span>
+          <span class="tag">Quantum Computing</span>
+        </div>
+      </div>
+      <div>
+        <div class="side-card">
+          <div class="side-card-title">Affiliations</div>
+          <div class="affil-item">
+            <div class="affil-dot"></div>
+            <div><div class="affil-name">Joint Quantum Institute, UMD</div><div class="affil-role">PhD Candidate, ECE </div><div class="affil-role">2021–2026</div></div>
+          </div>
+          <div class="affil-item">
+            <div class="affil-dot"></div>
+            <div><div class="affil-name">Institute for Quantum Computing, Waterloo</div><div class="affil-role">MASc, ECE (Quantum Information) </div><div class="affil-role">2019–2021</div></div>
+          </div>
+          <div class="affil-item">
+            <div class="affil-dot"></div>
+            <div><div class="affil-name">Jadavpur University, India</div><div class="affil-role">BE, Electronics & Telecommunication </div><div class="affil-role">2014–2018</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+  <!-- RESEARCH -->
+  <div class="panel" id="panel-research">
+    <p class="sec-label">PhD & Masters Projects</p>
+    <h2 class="sec-title">Research <em>Focus</em></h2>
+    <div class="card-list">
+
+      <div class="card">
+        <div class="card-meta"><span class="card-year">2023 – Present</span><span class="badge badge-accent">PhD</span></div>
+        <div class="card-title">Topological Photonics for Nonlinear Interactions & Photonic Computing</div>
+        <div class="card-sub">Joint Quantum Institute, UMD</div>
+        <div class="card-desc">Designing photonic integrated circuits (silicon nitride, lithium niobate, III-V materials) using analytical techniques and commercial simulation tools for engineering optical nonlinearity for frequency comb generation and photonic computing. Worked with foundries for performing tape-out and characterization of photonic integrated circuits.</div>
+        <div class="card-links">
+          <a href="https://www.science.org/doi/full/10.1126/science.adu6368" target="_blank" class="clink">Science (2026) →</a>
+          <a href="#" onclick="switchTab('patents');return false;" class="clink">See Patents →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-meta"><span class="card-year">2021 – Present</span><span class="badge badge-accent">PhD</span></div>
+        <div class="card-title">Optically Probing Strongly Correlated Electronic States in 2D Semiconductors</div>
+        <div class="card-sub">Joint Quantum Institute, UMD</div>
+        <div class="card-desc">Using quantum optics and light-matter interaction tools to explore many-body physics, topology, and chirality in 2D semiconductors. Designed, built, and maintained optical setups for real-/momentum-space imaging, ultrafast spectroscopy, nonlinear optics, interferometry, and time-tagged measurements in two 4K cryostats and one dilution fridge.</div>
+        <div class="card-links">
+		  <a href="https://www.science.org/doi/full/10.1126/science.ads5266" target="_blank" class="clink">Science (2026) →</a>
+          <a href="https://www.science.org/doi/full/10.1126/sciadv.adv2023" target="_blank" class="clink">Science Advances (2025) →</a>
+          <a href="https://www.science.org/doi/full/10.1126/sciadv.adr5904" target="_blank" class="clink">Science Advances (2024) →</a>
+		  <a href="https://www.nature.com/articles/s41467-024-46616-x" target="_blank" class="clink">Nature Communications (2024) →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-meta"><span class="card-year">2019 – 2021</span><span class="badge badge-accent">MASc</span></div>
+        <div class="card-title">Deterministic Single Photon Subtraction for Engineering Exotic Non-Classical States of Light</div>
+        <div class="card-sub">IQC, University of Waterloo</div>
+        <div class="card-desc">Analytical and numerical study proposing deterministic single photon subtraction from arbitrary states using a single quantum emitter coupled to a chiral waveguide or cavity. Demonstrated applications in quantum information theory and metrology.</div>
+        <div class="card-links">
+          <a href="http://hdl.handle.net/10012/17024" target="_blank" class="clink">Master's Thesis →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-meta"><span class="card-year">2019 – 2021</span><span class="badge badge-accent">MASc</span></div>
+        <div class="card-title">Inverse Design of Optical Antennas for Shaping Emission from NV Centers</div>
+        <div class="card-sub">IQC, University of Waterloo</div>
+        <div class="card-desc">Used adjoint optimization and inverse design to engineer diamond nanophotonic devices enabling highly directional emission from nitrogen-vacancy centers.</div>
+      </div>
+
+    </div>
+  </div>
+
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+  <!-- PUBLICATIONS -->
+  <div class="panel" id="panel-publications">
+    <p class="sec-label">Peer-Reviewed Work</p>
+    <h2 class="sec-title">Publications</h2>
+
+    <p style="font-size:12px;color:var(--text-3);margin-bottom:1.8rem;font-style:italic;">* Authors contributed equally</p>
+
+    <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-3);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);">Under Peer Review</div>
+    <div class="row-list" style="margin-bottom:3rem;">
+      <div class="row">
+        <div class="row-key">2026</div>
+        <div>
+          <div class="row-title">Single-shot realization of 10000-mode octave-spanning artificial gauge fields</div>
+          <div class="row-authors">L. Xu*, A. Padhye*, <strong>Supratik Sarkar</strong>, A. Parhizkar, C. J. Flower, G. Moille, K. Srinivasan, M. Hafezi, M. J. Mehrabad</div>
+          <div class="row-links"><a href="#" class="clink">Coming to arXiv →</a></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row-key">2025</div>
+        <div>
+          <div class="row-title">Photon subtraction using a three-level emitter coupled to a chiral waveguide</div>
+          <div class="row-authors">A. Pasharavesh*, <strong>Supratik Sarkar*</strong>, G. Bappi, J. Du, S. S. Venuturumilli, M. Bajcsy</div>
+          <div class="row-links"><a href="#" class="clink">Coming to arXiv →</a></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row-key">2025</div>
+        <div>
+          <div class="row-title">Probing individual quantum emitters in bulk semiconductors via photonic nanojets</div>
+          <div class="row-authors">B. Semnani, S. S. Venuturumilli, M. Soltani, A. Pasharavesh, N. Videnov, P. Adhikary, P. Anderson, <strong>Supratik Sarkar</strong>, V. R. R. Muthu, M. Bajcsy</div>
+		  <div class="row-links"><a href="#" class="clink">Coming to arXiv →</a></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row-key">2025</div>
+        <div>
+          <div class="row-title">Probing quantum anomalous Hall states in twisted bilayer WSe₂ via attractive polaron spectroscopy</div>
+          <div class="row-authors">B. Gao, M. Ghafariasl, M. J. Mehrabad, T.-S. Huang, L. Zhang, D. Session, P. Upadhyay, R. Ma, G. Alshalan, D. G. Suárez-Forero, <strong>Supratik Sarkar</strong>, S. Park, H. Jang, K. Watanabe, T. Taniguchi, M. Xie, Y. Zhou, M. Hafezi</div>
+          <div class="row-links"><a href="https://arxiv.org/abs/2504.11530" target="_blank" class="clink">arXiv:2504.11530 →</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-3);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);">Peer-Reviewed Publications</div>
+    <div class="row-list">
+      <div class="row">
+        <div class="row-key">2026</div>
+        <div>
+          <div class="row-title">Giant enhancement of exciton diffusion near an electronic Mott insulator</div>
+          <div class="row-authors">P. Upadhyay*, D. G. Suárez-Forero*, T.-S. Huang*, M. J. Mehrabad, B. Gao, <strong>Supratik Sarkar</strong>, D. Session, K. Watanabe, T. Taniguchi, Y. Zhou, M. Knap, M. Hafezi</div>
+          <div class="row-venue">Science 391, 394–398 (2026)</div>
+          <div class="row-links"><a href="https://www.science.org/doi/full/10.1126/science.ads5266" target="_blank" class="clink">DOI →</a> · <a href="https://jqi.umd.edu/news/sudden-breakups-monogamous-quantum-couples-surprise-researchers" target="_blank" class="clink">JQI News →</a>
+		   · <a href="https://phys.org/news/2026-01-sudden-breakups-monogamous-quantum-couples.html" target="_blank" class="clink">Phys.org →</a></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row-key">2025</div>
+        <div>
+          <div class="row-title">Multi-timescale frequency–phase matching for high-yield nonlinear photonics</div>
+          <div class="row-authors">M. J. Mehrabad*, L. Xu*, G. Moille, C. J. Flower, <strong>Supratik Sarkar</strong>, A. Padhye, S.-C. Ou, D. G. Suárez-Forero, M. Ghafariasl, Y. Chembo, K. Srinivasan, M. Hafezi</div>
+          <div class="row-venue">Science 390, 612–616 (2025)</div>
+          <div class="row-links"><a href="https://www.science.org/doi/full/10.1126/science.adu6368" target="_blank" class="clink">DOI →</a> · <a href="https://jqi.umd.edu/news/passive-approach-new-chips-reliably-unlock-color-conversion" target="_blank" class="clink">JQI News →</a>
+		   · <a href="https://phys.org/news/2025-11-photonic-chips-passively-laser-multiple.html" target="_blank" class="clink">Phys.org →</a> · <a href="https://optics.org/news/joint-quantum-institute-develops-chip-to-turn-one-wavelength-of-light-into-many" target="_blank" class="clink">Optics.org →</a>
+		   · <a href="https://www.mittrchina.com/news/detail/15555" target="_blank" class="clink">MIT Technology Review China →</a></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row-key">2025</div>
+        <div>
+          <div class="row-title">Sub-wavelength optical lattice in 2D materials</div>
+          <div class="row-authors"><strong>Supratik Sarkar*</strong>, M. J. Mehrabad*, D. G. Suárez-Forero*, L. Gu*, C. J. Flower, L. Xu, K. Watanabe, T. Taniguchi, S. Park, H. Jang, Y. Zhou, M. Hafezi</div>
+          <div class="row-venue">Science Advances 11, eadv2023 (2025)</div>
+          <div class="featured-note">★ Featured on Science Advances website</div>
+          <div class="row-links"><a href="https://www.science.org/doi/full/10.1126/sciadv.adv2023" target="_blank" class="clink">DOI →</a>· <a href="https://jqi.umd.edu/news/researchers-identify-groovy-way-beat-diffraction-limit" target="_blank" class="clink">JQI News →</a></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row-key">2024</div>
+        <div>
+          <div class="row-title">Chiral flat-band optical cavity with atomically thin mirrors</div>
+          <div class="row-authors">D. G. Suárez-Forero*, R. Ni*, <strong>Supratik Sarkar*</strong>, M. J. Mehrabad*, E. Mechtel, V. Simonyan, A. Grankin, K. Watanabe, T. Taniguchi, S. Park, H. Jang, M. Hafezi, You Zhou</div>
+          <div class="row-venue">Science Advances 10, eadr5904 (2024)</div>
+          <div class="featured-note">★ Featured on Science Advances website</div>
+          <div class="row-links"><a href="https://www.science.org/doi/full/10.1126/sciadv.adr5904" target="_blank" class="clink">DOI →</a></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row-key">2024</div>
+        <div>
+          <div class="row-title">Excitonic Mott insulator in a Bose-Fermi-Hubbard system of moiré WS₂/WSe₂ heterobilayer</div>
+          <div class="row-authors">B. Gao*, D. G. Suárez-Forero*, <strong>Supratik Sarkar*</strong>, T.-S. Huang, D. Session, M. J. Mehrabad, R. Ni, M. Xie, P. Upadhyay, J. Vannucci, S. Mittal, K. Watanabe, T. Taniguchi, A. Imamoglu, Y. Zhou, M. Hafezi</div>
+          <div class="row-venue">Nature Communications 15, 2305 (2024)</div>
+          <div class="row-links"><a href="https://www.nature.com/articles/s41467-024-46616-x" target="_blank" class="clink">DOI →</a></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row-key">2018</div>
+        <div>
+          <div class="row-title">Tailoring Non-Gaussian Continuous-Variable Graph States</div>
+          <div class="row-authors">M. Walschaers, <strong>Supratik Sarkar</strong>, V. Parigi, and N. Treps</div>
+          <div class="row-venue">Physical Review Letters 121, 220501 (2018)</div>
+          <div class="row-links"><a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.121.220501" target="_blank" class="clink">DOI →</a></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row-key">2018</div>
+        <div>
+          <div class="row-title">Influence of polarization and self-polarization charges on impurity binding energy in spherical quantum dot with parabolic confinement</div>
+          <div class="row-authors"><strong>Supratik Sarkar</strong>, S. Sarkar, and C. Bose</div>
+          <div class="row-venue">Physica B: Condensed Matter 541, 75–78 (2018)</div>
+          <div class="row-links"><a href="https://www.sciencedirect.com/science/article/pii/S0921452618303016" target="_blank" class="clink">DOI →</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:2.5rem;">
+      <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-3);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);">Theses</div>
+      <div class="row-list">
+        <div class="row">
+          <div class="row-key">2021</div>
+          <div>
+            <div class="row-title">Creating and shaping light at single photon level</div>
+            <div class="row-authors"><strong>Supratik Sarkar</strong></div>
+            <div class="row-venue">Master's Thesis, University of Waterloo</div>
+            <div class="row-links"><a href="http://hdl.handle.net/10012/17024" target="_blank" class="clink">DOI →</a></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-key">2018</div>
+          <div>
+            <div class="row-title">Tunneling in Graphene SymFETs</div>
+            <div class="row-authors"><strong>Supratik Sarkar</strong> and S. Sarkar</div>
+            <div class="row-venue">Bachelor's Project Report, Jadavpur University</div>
+            <div class="row-links"><a href="https://arxiv.org/abs/1805.09659" target="_blank" class="clink">arXiv:1805.09659 →</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+  <!-- PATENTS -->
+  <div class="panel" id="panel-patents">
+    <p class="sec-label">Intellectual Property</p>
+    <h2 class="sec-title">Patent <em>Applications</em></h2>
+    <div class="row-list">
+      <div class="row">
+        <div class="row-key" style="font-size:10px;">Provisional US<br/>Filed 2026</div>
+        <div>
+          <div class="row-title">Systems of Ultrabroadband Multimodal Artificial Gauge Fields</div>
+          <div class="row-meta">Inventors: M. J. Mehrabad, L. Xu, A. Padhye, <strong>Supratik Sarkar</strong>, M. Hafezi</div>
+          <span class="badge badge-blue" style="display:inline-block;margin-bottom:0.6rem;">Provisional · Filed 2026</span>
+          <div class="row-desc">Systems for generating ultrabroadband multimodal artificial gauge fields in photonic platforms, enabling new regimes of topological photonics and synthetic dimensions.</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row-key" style="font-size:10px;">Provisional US<br/>Filed 2026</div>
+        <div>
+          <div class="row-title">Topological Photonics Architectures for Optical Computing and Artificial Intelligence</div>
+          <div class="row-meta">Inventors: M. J. Mehrabad, L. Xu, <strong>Supratik Sarkar</strong>, Z.-Y. Wei, M. Hafezi</div>
+          <span class="badge badge-blue" style="display:inline-block;margin-bottom:0.6rem;">Provisional · Filed 2026</span>
+          <div class="row-desc">Architectures leveraging topological photonic structures for robust, scalable optical neuromorphic computing.</div>
+          <div style="margin-top:0.5rem;"><span class="badge badge-accent">Invention of the Year Award Finalist · University of Maryland 2026</span></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row-key" style="font-size:10px;">Provisional US<br/>Filed 2025</div>
+        <div>
+          <div class="row-title">Systems and Methods for an Active Nanoplasmonic Platform for Controllable Light-Matter Interaction</div>
+          <div class="row-meta">Inventors: <strong>Supratik Sarkar</strong>, M. J. Mehrabad, Y. Zhou, M. Hafezi</div>
+          <span class="badge badge-blue" style="display:inline-block;margin-bottom:0.6rem;">Provisional · Filed 2025</span>
+          <div class="row-desc">A nanoplasmonic platform enabling active, tunable control of light-matter interaction at the nanoscale, with applications in quantum sensing and optical switching.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+  <!-- TALKS -->
+  <div class="panel" id="panel-talks">
+    <p class="sec-label">Conferences & Invited Presentations</p>
+    <h2 class="sec-title">Talks &amp; <em>Presentations</em></h2>
+    <div class="row-list">
+	<div class="row">
+        <div class="row-key">2025</div>
+        <div>
+          <div class="row-title">European Physical Society (EPS) NANOMETA</div>
+          <div class="row-venue">2 Invited Talks by Prof. Mohammad Hafezi and Prof. You Zhou + Poster</div>
+          <div class="row-meta">Seefeld in Tirol, Austria · 2026</div>
+		  <div style="margin-top:4px;"><span class="badge badge-green">Nanophotonics Best Poster Award</span></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row-key">2025</div>
+        <div>
+          <div class="row-title">Symposium II, 15th Int'l Conference on Metamaterials, Photonic Crystals and Plasmonics (META)</div>
+          <div class="row-venue">Invited Talk</div>
+          <div class="row-meta">Malaga, Spain · 2025</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row-key">2025</div>
+        <div>
+          <div class="row-title">Conference on Lasers and Electro-Optics (CLEO)</div>
+          <div class="row-venue">Contributed Talk</div>
+          <div class="row-meta">Long Beach, CA, USA · 2025</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row-key">2024</div>
+        <div>
+          <div class="row-title">Int'l Conference on Physics of Excitons and Polaritons in Semiconductors (PEPS)</div>
+          <div class="row-venue">Contributed Talk + Poster</div>
+          <div class="row-meta">Reykjavík, Iceland · 2024</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row-key">2024</div>
+        <div>
+          <div class="row-title">European Physical Society (EPS) NANOMETA</div>
+          <div class="row-venue">Contributed Talk</div>
+          <div class="row-meta">Seefeld in Tirol, Austria · 2024</div>
+          <div style="margin-top:4px;"><span class="badge badge-green">Breakthrough Talk</span></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row-key">2021</div>
+        <div>
+          <div class="row-title">American Physical Society (APS) Division of Atomic, Molecular and Optical Physics (DAMOP)</div>
+          <div class="row-venue">Contributed Talk</div>
+		  <div class="row-meta">Remote · 2021</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+  <!-- CV -->
+  <div class="panel" id="panel-cv">
+    <p class="sec-label">Curriculum Vitae</p>
+    <h2 class="sec-title" style="margin-bottom:1.8rem;">CV</h2>
+    <div class="cv-banner">
+      <div class="cv-banner-text"><strong>Full CV available as PDF</strong> — Supratik Sarkar, Joint Quantum Institute, UMD</div>
+      <a href="#" class="btn btn-primary">Download PDF →</a>
+    </div>
+
+    <div class="cv-sec">
+      <div class="cv-sec-title">Education</div>
+      <div class="cv-row">
+        <div class="cv-period">2021 – 2026 (anticipated)</div>
+        <div><div class="cv-role">PhD, Electrical and Computer Engineering</div><div class="cv-org">Joint Quantum Institute, University of Maryland, College Park</div><div class="cv-detail">GPA: 3.9/4 · Supervisor: Prof. Mohammad Hafezi</div></div>
+      </div>
+      <div class="cv-row">
+        <div class="cv-period">2019 – 2021</div>
+        <div><div class="cv-role">Master of Applied Science, ECE (Quantum Information)</div><div class="cv-org">Institute for Quantum Computing, University of Waterloo, Canada</div><div class="cv-detail">GPA: 96.20/100 · Thesis: "Creating and shaping light at single photon level" · Supervisor: Prof. Michal Bajcsy</div></div>
+      </div>
+      <div class="cv-row">
+        <div class="cv-period">2014 – 2018</div>
+        <div><div class="cv-role">Bachelor of Engineering, Electronics & Telecommunication Engineering</div><div class="cv-org">Jadavpur University, Kolkata, India</div><div class="cv-detail">GPA: 9.26/10 · First class with honors</div></div>
+      </div>
+    </div>
+
+    <div class="cv-sec">
+      <div class="cv-sec-title">Teaching</div>
+      <div class="cv-row">
+        <div class="cv-period">Winter 2020</div>
+        <div><div class="cv-role">Teaching Assistant — ECE 404: Geometric and Physical Optics</div><div class="cv-org">University of Waterloo · Instructor: Prof. Michal Bajcsy</div><div class="cv-detail">Held weekly office hours; graded assignments for ~50 undergraduate students.</div></div>
+      </div>
+    </div>
+
+    <div class="cv-sec">
+      <div class="cv-sec-title">Awards, Scholarships & Grants</div>
+      <div class="cv-row"><div class="cv-period">2026</div><div><div class="cv-role">Invention of the Year Award Finalist (Quantum Category)</div><div class="cv-org">University of Maryland</div></div></div>
+      <div class="cv-row"><div class="cv-period">2026</div><div><div class="cv-role">Outstanding Graduate Assistant Award</div><div class="cv-org">University of Maryland</div></div></div>
+      <div class="cv-row"><div class="cv-period">2026</div><div><div class="cv-role">Nanophotonics Best Poster Award</div><div class="cv-org">European Physical Society (EPS) NANOMETA</div></div></div>
+      <div class="cv-row"><div class="cv-period">2025</div><div><div class="cv-role">NSF I-Corps</div><div class="cv-org">National Science Foundation</div></div></div>
+      <div class="cv-row"><div class="cv-period">2021</div><div><div class="cv-role">Dean's Fellowship</div><div class="cv-org">University of Maryland</div></div></div>
+      <div class="cv-row"><div class="cv-period">2020</div><div><div class="cv-role">WIN Nanofellowship</div><div class="cv-org">Waterloo Institute for Nanotechnology</div></div></div>
+      <div class="cv-row"><div class="cv-period">2020</div><div><div class="cv-role">Faculty of Engineering Award</div><div class="cv-org">Department of ECE, University of Waterloo — for academic and research performance</div></div></div>
+      <div class="cv-row"><div class="cv-period">2019</div><div><div class="cv-role">International Masters Student Award</div><div class="cv-org">University of Waterloo</div></div></div>
+      <div class="cv-row"><div class="cv-period">2019</div><div><div class="cv-role">Graduate Research Studentship (GRS)</div><div class="cv-org">University of Waterloo</div></div></div>
+      <div class="cv-row"><div class="cv-period">2018</div><div><div class="cv-role">Charpak Masters Scholarship (Declined)</div><div class="cv-org">Government of France — for pursuing Masters in France</div></div></div>
+      <div class="cv-row"><div class="cv-period">2017</div><div><div class="cv-role">CNRS Internship Scholarship</div><div class="cv-org">Laboratoire Kastler Brossel (LKB), Paris, France</div></div></div>
+    </div>
+
+    <div class="cv-sec">
+      <div class="cv-sec-title">Journal Referee</div>
+      <div class="cv-row">
+        <div class="cv-period"></div>
+        <div><div class="cv-role">Reviewer — APS Journals</div><div class="cv-org">Physical Review Letters, Physical Review Applied</div></div>
+      </div>
+      <div class="cv-row">
+        <div class="cv-period"></div>
+        <div><div class="cv-role">Reviewer — ACS Journals</div><div class="cv-org">Nano Letters</div></div>
+      </div>
+    </div>
+
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+  <!-- CONTACT -->
+  <div class="panel" id="panel-contact">
+    <p class="sec-label">Get in Touch</p>
+    <h2 class="sec-title" style="margin-bottom:1.8rem;">Contact</h2>
+    <div class="contact-grid">
+      <a href="mailto:sarkar@umd.edu" class="contact-card">
+        <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg></div>
+        <div><div class="c-label">Email</div><div class="c-value">sarkar@umd.edu</div></div>
+      </a>
+      <a href="https://scholar.google.com/citations?user=IVfoTFgAAAAJ&hl=en" target="_blank" class="contact-card">
+        <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12A10 10 0 1 1 12 2"/><path d="M22 2 12 12"/><polyline points="16,2 22,2 22,8"/></svg></div>
+        <div><div class="c-label">Google Scholar</div><div class="c-value">Supratik Sarkar</div></div>
+      </a>
+      <a href="https://www.linkedin.com/in/supratiksarkar/" target="_blank" class="contact-card">
+        <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+        <div><div class="c-label">LinkedIn</div><div class="c-value">supratiksarkar</div></div>
+      </a>
+      <a href="https://www.instagram.com/supra_sarkar/" target="_blank" class="contact-card">
+        <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></div>
+        <div><div class="c-label">Instagram</div><div class="c-value">@supra_sarkar</div></div>
+      </a>
+    </div>
+    <div class="contact-note">
+      I'm based at the Joint Quantum Institute, 4196 Stadium Dr, College Park, MD 20742. I'm happy to hear from prospective collaborators, and students. I typically respond within a few business days.
+    </div>
+  </div>
+
+</div><!-- /wrapper -->
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-copy">© 2026 <span>Supratik Sarkar</span> </div>
+    <!--  <div class="footer-copy">sarkar@umd.edu</div>  -->
+  </div>
+</footer>
+
+<script>
+  // TABS
+  function switchTab(name) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    const btn = [...document.querySelectorAll('.tab-btn')].find(b => b.getAttribute('onclick') === "switchTab('" + name + "')");
+    if (btn) btn.classList.add('active');
+    const panel = document.getElementById('panel-' + name);
+    if (panel) panel.classList.add('active');
+    const bar = document.getElementById('tabs-bar');
+    const top = bar.getBoundingClientRect().top + window.scrollY - 60;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+
+  function scrollTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+  // THEME
+  function toggleTheme() {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    document.getElementById('icon-sun').style.display = isDark ? 'none' : '';
+    document.getElementById('icon-moon').style.display = isDark ? '' : 'none';
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+  }
+
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    document.getElementById('icon-sun').style.display = 'none';
+    document.getElementById('icon-moon').style.display = '';
+  }
+
+  // PHOTO UPLOAD
+  const photoInput = document.getElementById('photo-input');
+  const photoImg = document.getElementById('photo-img');
+  const photoPlaceholder = document.getElementById('photo-placeholder');
+
+  // Restore saved photo
+  const savedPhoto = localStorage.getItem('profile-photo');
+  if (savedPhoto) {
+    photoImg.src = savedPhoto;
+    photoImg.style.display = 'block';
+    photoPlaceholder.style.display = 'none';
+  }
+
+  photoInput.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      const dataUrl = ev.target.result;
+      photoImg.src = dataUrl;
+      photoImg.style.display = 'block';
+      photoPlaceholder.style.display = 'none';
+      try { localStorage.setItem('profile-photo', dataUrl); } catch(err) {}
+    };
+    reader.readAsDataURL(file);
+  });
+
+  switchTab('about');
+</script>
+</body>
+</html>
