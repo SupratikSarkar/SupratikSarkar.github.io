@@ -52,7 +52,7 @@
       --photo-bg:      #e8e7e2;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: auto; }
     body {
       background: var(--bg);
       color: var(--text);
@@ -357,7 +357,7 @@
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <span class="nav-logo" onclick="scrollTop()" style="cursor:pointer;">Supratik <span>Sarkar</span></span>
+    <span class="nav-logo" onclick="window.location.reload()" style="cursor:pointer;">Supratik <span>Sarkar</span></span>
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
       <svg id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
@@ -385,7 +385,7 @@
           <strong>PhD Candidate</strong> · Joint Quantum Institute, University of Maryland
         </p>
         <p class="hero-bio">
-          I work at the intersection of photonics, quantum optics, and condensed matter physics — studying exotic quantum phases of light and matter and engineering photonic systems for quantum information and computing. Based at the <a href="https://jqi.umd.edu/" target="_blank">Joint Quantum Institute</a>, College Park, MD.
+          I work at the intersection of photonics, quantum optics, and condensed matter physics — probing exotic quantum phases of matter and engineering photonic systems for quantum information and computing. Based at the <a href="https://jqi.umd.edu/" target="_blank">Joint Quantum Institute</a>, College Park, MD.
         </p>
         <div class="hero-ctas">
           <a href="https://scholar.google.com/citations?user=IVfoTFgAAAAJ&hl=en" target="_blank" class="btn btn-primary">Google Scholar →</a>
@@ -843,9 +843,9 @@
     <p class="sec-label">Get in Touch</p>
     <h2 class="sec-title" style="margin-bottom:1.8rem;">Contact</h2>
     <div class="contact-grid">
-      <a href="mailto:sarkar@umd.edu" class="contact-card">
+      <a href="/cdn-cgi/l/email-protection#91e2f0e3faf0e3d1e4fcf5bff4f5e4" class="contact-card">
         <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg></div>
-        <div><div class="c-label">Email</div><div class="c-value">sarkar@umd.edu</div></div>
+        <div><div class="c-label">Email</div><div class="c-value"><span class="__cf_email__" data-cfemail="b4c7d5c6dfd5c6f4c1d9d09ad1d0c1">[email&#160;protected]</span></div></div>
       </a>
       <a href="https://scholar.google.com/citations?user=IVfoTFgAAAAJ&hl=en" target="_blank" class="contact-card">
         <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12A10 10 0 1 1 12 2"/><path d="M22 2 12 12"/><polyline points="16,2 22,2 22,8"/></svg></div>
@@ -874,7 +874,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // TABS
   function switchTab(name) {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -884,8 +884,7 @@
     const panel = document.getElementById('panel-' + name);
     if (panel) panel.classList.add('active');
     const bar = document.getElementById('tabs-bar');
-    const top = bar.getBoundingClientRect().top + window.scrollY - 60;
-    window.scrollTo({ top, behavior: 'smooth' });
+    window.scrollTo({ top: bar.offsetTop - 60, behavior: 'smooth' });
   }
 
   function scrollTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
@@ -921,7 +920,14 @@
   }
 
 
-  switchTab('about');
+  // Activate About panel on load without scrolling away from hero
+  document.getElementById('panel-about').classList.add('active');
+
+  // Always land at top on page open
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+  document.addEventListener('DOMContentLoaded', () => window.scrollTo(0, 0));
+  window.addEventListener('load', () => { window.scrollTo(0, 0); setTimeout(() => window.scrollTo(0, 0), 50); });
 </script>
 </body>
 </html>
