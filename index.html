@@ -311,6 +311,24 @@
     .cv-org { font-size: 12px; color: var(--accent); margin-bottom: 3px; }
     .cv-detail { font-size: 12px; color: var(--text-3); line-height: 1.7; }
 
+    /* CV — Compact Awards variant */
+    .cv-row-compact {
+      display: grid; grid-template-columns: 80px 1fr auto;
+      gap: 1.2rem; padding: 0.55rem 0;
+      border-bottom: 1px solid var(--border); align-items: baseline;
+    }
+    .cv-row-compact:last-child { border-bottom: none; }
+    @media (max-width: 580px) {
+      .cv-row-compact { grid-template-columns: 60px 1fr; gap: 0.8rem; }
+      .cv-row-compact .cv-org-compact { grid-column: 1 / -1; padding-left: 0; margin-top: 2px; }
+    }
+    .cv-row-compact .cv-period { font-size: 11px; color: var(--text-3); }
+    .cv-row-compact .cv-role-compact { font-size: 13px; color: var(--text); font-weight: 500; line-height: 1.45; }
+    .cv-row-compact .cv-org-compact { font-size: 11.5px; color: var(--text-3); line-height: 1.45; text-align: right; white-space: nowrap; }
+    @media (max-width: 580px) {
+      .cv-row-compact .cv-org-compact { text-align: left; white-space: normal; }
+    }
+
     /* CONTACT */
     .contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem; }
     @media (max-width: 560px) { .contact-grid { grid-template-columns: 1fr; } }
@@ -804,11 +822,11 @@
       <div class="cv-sec-title">Education</div>
       <div class="cv-row">
         <div class="cv-period">2021 – 2026 (anticipated)</div>
-        <div><div class="cv-role">PhD, Electrical and Computer Engineering</div><div class="cv-org">Joint Quantum Institute, University of Maryland, College Park</div><div class="cv-detail">GPA: 3.9/4 · Supervisor: Prof. Mohammad Hafezi</div></div>
+        <div><div class="cv-role">Ph.D., Electrical and Computer Engineering</div><div class="cv-org">Joint Quantum Institute, University of Maryland, College Park</div><div class="cv-detail">GPA: 3.9/4 · Supervisor: Prof. Mohammad Hafezi</div></div>
       </div>
       <div class="cv-row">
         <div class="cv-period">2019 – 2021</div>
-        <div><div class="cv-role">Master of Applied Science, ECE (Quantum Information)</div><div class="cv-org">Institute for Quantum Computing, University of Waterloo, Canada</div><div class="cv-detail">GPA: 96.20/100 · Supervisor: Prof. Michal Bajcsy</div><div class="cv-detail">Thesis: "Creating and shaping light at single photon level"</div></div>
+        <div><div class="cv-role">Master of Applied Science, Electrical and Computer Engineering (Quantum Information)</div><div class="cv-org">Institute for Quantum Computing, University of Waterloo, Canada</div><div class="cv-detail">GPA: 96.20/100 · Supervisor: Prof. Michal Bajcsy</div><div class="cv-detail">Thesis: "Creating and shaping light at single photon level"</div></div>
       </div>
       <div class="cv-row">
         <div class="cv-period">2014 – 2018</div>
@@ -826,24 +844,24 @@
 
     <div class="cv-sec">
       <div class="cv-sec-title">Awards, Scholarships & Grants</div>
-      <div class="cv-row"><div class="cv-period">2026</div><div><div class="cv-role">Invention of the Year Award Finalist (Quantum Category)</div><div class="cv-org">University of Maryland</div></div></div>
-      <div class="cv-row"><div class="cv-period">2026</div><div><div class="cv-role">Outstanding Graduate Assistant Award</div><div class="cv-org">University of Maryland</div></div></div>
-      <div class="cv-row"><div class="cv-period">2026</div><div><div class="cv-role">Nanophotonics Best Poster Award</div><div class="cv-org">European Physical Society (EPS) NANOMETA</div></div></div>
-      <div class="cv-row"><div class="cv-period">2025</div><div><div class="cv-role">NSF I-Corps</div><div class="cv-org">National Science Foundation</div></div></div>
-      <div class="cv-row"><div class="cv-period">2021</div><div><div class="cv-role">Dean's Fellowship</div><div class="cv-org">University of Maryland</div></div></div>
-      <div class="cv-row"><div class="cv-period">2020</div><div><div class="cv-role">WIN Nanofellowship</div><div class="cv-org">Waterloo Institute for Nanotechnology</div></div></div>
-      <div class="cv-row"><div class="cv-period">2020</div><div><div class="cv-role">Faculty of Engineering Award</div><div class="cv-org">Department of ECE, University of Waterloo</div></div></div>
-      <div class="cv-row"><div class="cv-period">2019</div><div><div class="cv-role">International Masters Student Award</div><div class="cv-org">University of Waterloo</div></div></div>
-      <div class="cv-row"><div class="cv-period">2019</div><div><div class="cv-role">Graduate Research Studentship (GRS)</div><div class="cv-org">University of Waterloo</div></div></div>
-      <div class="cv-row"><div class="cv-period">2018</div><div><div class="cv-role">Charpak Masters Scholarship (Declined)</div><div class="cv-org">Government of France</div></div></div>
-      <div class="cv-row"><div class="cv-period">2017</div><div><div class="cv-role">CNRS Internship Scholarship</div><div class="cv-org">Laboratoire Kastler Brossel (LKB), Paris, France</div></div></div>
+      <div class="cv-row-compact"><div class="cv-period">2026</div><div class="cv-role-compact">Invention of the Year Award Finalist (Quantum Category)</div><div class="cv-org-compact">University of Maryland</div></div>
+      <div class="cv-row-compact"><div class="cv-period">2026</div><div class="cv-role-compact">Outstanding Graduate Assistant Award</div><div class="cv-org-compact">University of Maryland</div></div>
+      <div class="cv-row-compact"><div class="cv-period">2026</div><div class="cv-role-compact">Nanophotonics Best Poster Award</div><div class="cv-org-compact">EPS NANOMETA</div></div>
+      <div class="cv-row-compact"><div class="cv-period">2025</div><div class="cv-role-compact">NSF I-Corps</div><div class="cv-org-compact">National Science Foundation</div></div>
+      <div class="cv-row-compact"><div class="cv-period">2021</div><div class="cv-role-compact">Dean's Fellowship</div><div class="cv-org-compact">University of Maryland</div></div>
+      <div class="cv-row-compact"><div class="cv-period">2020</div><div class="cv-role-compact">WIN Nanofellowship</div><div class="cv-org-compact">Waterloo Institute for Nanotechnology</div></div>
+      <div class="cv-row-compact"><div class="cv-period">2020</div><div class="cv-role-compact">Faculty of Engineering Award</div><div class="cv-org-compact">University of Waterloo</div></div>
+      <div class="cv-row-compact"><div class="cv-period">2019</div><div class="cv-role-compact">International Masters Student Award</div><div class="cv-org-compact">University of Waterloo</div></div>
+      <div class="cv-row-compact"><div class="cv-period">2019</div><div class="cv-role-compact">Graduate Research Studentship (GRS)</div><div class="cv-org-compact">University of Waterloo</div></div>
+      <div class="cv-row-compact"><div class="cv-period">2018</div><div class="cv-role-compact">Charpak Masters Scholarship (Declined)</div><div class="cv-org-compact">Government of France</div></div>
+      <div class="cv-row-compact"><div class="cv-period">2017</div><div class="cv-role-compact">CNRS Internship Scholarship</div><div class="cv-org-compact">Laboratoire Kastler Brossel, Paris</div></div>
     </div>
 
     <div class="cv-sec">
       <div class="cv-sec-title">Journal Referee</div>
       <div class="cv-row">
         <div class="cv-period"></div>
-        <div><div class="cv-role">Reviewer — APS Journals</div><div class="cv-org">Physical Review Letters, Physical Review Applied</div></div>
+        <div><div class="cv-role">Reviewer — APS Journals</div><div class="cv-org">Physical Review Letters, Physical Review Applied, Physical Review B</div></div>
       </div>
       <div class="cv-row">
         <div class="cv-period"></div>
