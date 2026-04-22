@@ -311,23 +311,10 @@
     .cv-org { font-size: 12px; color: var(--accent); margin-bottom: 3px; }
     .cv-detail { font-size: 12px; color: var(--text-3); line-height: 1.7; }
 
-    /* CV — Compact Awards variant */
-    .cv-row-compact {
-      display: grid; grid-template-columns: 80px 1fr auto;
-      gap: 1.2rem; padding: 0.55rem 0;
-      border-bottom: 1px solid var(--border); align-items: baseline;
-    }
-    .cv-row-compact:last-child { border-bottom: none; }
-    @media (max-width: 580px) {
-      .cv-row-compact { grid-template-columns: 60px 1fr; gap: 0.8rem; }
-      .cv-row-compact .cv-org-compact { grid-column: 1 / -1; padding-left: 0; margin-top: 2px; }
-    }
-    .cv-row-compact .cv-period { font-size: 11px; color: var(--text-3); }
-    .cv-row-compact .cv-role-compact { font-size: 13px; color: var(--text); font-weight: 500; line-height: 1.45; }
-    .cv-row-compact .cv-org-compact { font-size: 11.5px; color: var(--text-3); line-height: 1.45; text-align: right; white-space: nowrap; }
-    @media (max-width: 580px) {
-      .cv-row-compact .cv-org-compact { text-align: left; white-space: normal; }
-    }
+    /* CV — Compact row variant (same layout as .cv-row, just tighter) */
+    .cv-row.cv-row-tight { padding: 0.45rem 0; }
+    .cv-row.cv-row-tight .cv-role { margin-bottom: 0; }
+    .cv-row.cv-row-tight .cv-org { margin-bottom: 0; }
 
     /* CONTACT */
     .contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem; }
@@ -485,11 +472,11 @@
           <div class="side-card-title">Affiliations</div>
           <div class="affil-item">
             <div class="affil-dot"></div>
-            <div><div class="affil-name">Joint Quantum Institute, UMD</div><div class="affil-role">PhD Candidate, ECE </div><div class="affil-role">2021–2026</div></div>
+            <div><div class="affil-name">Joint Quantum Institute,<br>University of Maryland, USA</div><div class="affil-role">PhD Candidate, ECE </div><div class="affil-role">2021–2026</div></div>
           </div>
           <div class="affil-item">
             <div class="affil-dot"></div>
-            <div><div class="affil-name">Institute for Quantum Computing, Waterloo</div><div class="affil-role">MASc, ECE (Quantum Information) </div><div class="affil-role">2019–2021</div></div>
+            <div><div class="affil-name">Institute for Quantum Computing, University of Waterloo, Canada</div><div class="affil-role">MASc, ECE (Quantum Information) </div><div class="affil-role">2019–2021</div></div>
           </div>
           <div class="affil-item">
             <div class="affil-dot"></div>
@@ -511,7 +498,7 @@
       <div class="card">
         <div class="card-meta"><span class="card-year">2023 – Present</span><span class="badge badge-accent">PhD</span></div>
         <div class="card-title">Topological Photonics for Nonlinear Interactions & Photonic Computing</div>
-        <div class="card-sub">Joint Quantum Institute, UMD</div>
+        <div class="card-sub">Joint Quantum Institute, University of Maryland</div>
         <div class="card-desc">Designing photonic integrated circuits (silicon nitride, lithium niobate, III-V materials) using analytical techniques and commercial simulation tools for engineering optical nonlinearity for frequency comb generation and photonic computing. Worked with foundries for performing tape-out and characterization of photonic integrated circuits.</div>
         <div class="card-links">
           <a href="https://www.science.org/doi/full/10.1126/science.adu6368" target="_blank" class="clink">Science (2026) →</a>
@@ -522,7 +509,7 @@
       <div class="card">
         <div class="card-meta"><span class="card-year">2021 – Present</span><span class="badge badge-accent">PhD</span></div>
         <div class="card-title">Optically Probing Strongly Correlated Electronic States in 2D Semiconductors</div>
-        <div class="card-sub">Joint Quantum Institute, UMD</div>
+        <div class="card-sub">Joint Quantum Institute, University of Maryland</div>
         <div class="card-desc">Using quantum optics and light-matter interaction tools to explore many-body physics, topology, and chirality in 2D semiconductors. Designed, built, and maintained optical setups for real-/momentum-space imaging, ultrafast spectroscopy, nonlinear optics, interferometry, and time-tagged measurements in two 4K cryostats and one dilution fridge.</div>
         <div class="card-links">
 		  <a href="https://www.science.org/doi/full/10.1126/science.ads5266" target="_blank" class="clink">Science (2026) →</a>
@@ -535,7 +522,7 @@
       <div class="card">
         <div class="card-meta"><span class="card-year">2019 – 2021</span><span class="badge badge-accent">MASc</span></div>
         <div class="card-title">Deterministic Single Photon Subtraction for Engineering Exotic Non-Classical States of Light</div>
-        <div class="card-sub">IQC, University of Waterloo</div>
+        <div class="card-sub">Institute for Quantum Computing, University of Waterloo</div>
         <div class="card-desc">Analytical and numerical study proposing deterministic single photon subtraction from arbitrary states using a single quantum emitter coupled to a chiral waveguide or cavity. Demonstrated applications in quantum information theory and metrology.</div>
         <div class="card-links">
           <a href="http://hdl.handle.net/10012/17024" target="_blank" class="clink">Master's Thesis →</a>
@@ -545,7 +532,7 @@
       <div class="card">
         <div class="card-meta"><span class="card-year">2019 – 2021</span><span class="badge badge-accent">MASc</span></div>
         <div class="card-title">Inverse Design of Optical Antennas for Shaping Emission from NV Centers</div>
-        <div class="card-sub">IQC, University of Waterloo</div>
+        <div class="card-sub">Institute for Quantum Computing, University of Waterloo</div>
         <div class="card-desc">Used adjoint optimization and inverse design to engineer diamond nanophotonic devices enabling highly directional emission from nitrogen-vacancy centers.</div>
       </div>
 
@@ -814,7 +801,7 @@
     <p class="sec-label">Curriculum Vitae</p>
     <h2 class="sec-title" style="margin-bottom:1.8rem;">CV</h2>
     <div class="cv-banner">
-      <div class="cv-banner-text"><strong>Full CV available as PDF</strong> — Supratik Sarkar, Joint Quantum Institute, UMD (As of March 2026)</div>
+      <div class="cv-banner-text"><strong>Full CV available as PDF</strong> — Supratik Sarkar, Joint Quantum Institute, University of Maryland (As of March 2026)</div>
       <a href="CV_Sarkar.pdf" target="_blank" class="btn btn-primary">Open PDF →</a>
     </div>
 
@@ -844,17 +831,17 @@
 
     <div class="cv-sec">
       <div class="cv-sec-title">Awards, Scholarships & Grants</div>
-      <div class="cv-row-compact"><div class="cv-period">2026</div><div class="cv-role-compact">Invention of the Year Award Finalist (Quantum Category)</div><div class="cv-org-compact">University of Maryland</div></div>
-      <div class="cv-row-compact"><div class="cv-period">2026</div><div class="cv-role-compact">Outstanding Graduate Assistant Award</div><div class="cv-org-compact">University of Maryland</div></div>
-      <div class="cv-row-compact"><div class="cv-period">2026</div><div class="cv-role-compact">Nanophotonics Best Poster Award</div><div class="cv-org-compact">EPS NANOMETA</div></div>
-      <div class="cv-row-compact"><div class="cv-period">2025</div><div class="cv-role-compact">NSF I-Corps</div><div class="cv-org-compact">National Science Foundation</div></div>
-      <div class="cv-row-compact"><div class="cv-period">2021</div><div class="cv-role-compact">Dean's Fellowship</div><div class="cv-org-compact">University of Maryland</div></div>
-      <div class="cv-row-compact"><div class="cv-period">2020</div><div class="cv-role-compact">WIN Nanofellowship</div><div class="cv-org-compact">Waterloo Institute for Nanotechnology</div></div>
-      <div class="cv-row-compact"><div class="cv-period">2020</div><div class="cv-role-compact">Faculty of Engineering Award</div><div class="cv-org-compact">University of Waterloo</div></div>
-      <div class="cv-row-compact"><div class="cv-period">2019</div><div class="cv-role-compact">International Masters Student Award</div><div class="cv-org-compact">University of Waterloo</div></div>
-      <div class="cv-row-compact"><div class="cv-period">2019</div><div class="cv-role-compact">Graduate Research Studentship (GRS) Award</div><div class="cv-org-compact">University of Waterloo</div></div>
-      <div class="cv-row-compact"><div class="cv-period">2018</div><div class="cv-role-compact">Charpak Masters Scholarship (Declined)</div><div class="cv-org-compact">Government of France</div></div>
-      <div class="cv-row-compact"><div class="cv-period">2017</div><div class="cv-role-compact">CNRS Internship Scholarship</div><div class="cv-org-compact">Laboratoire Kastler Brossel, Paris</div></div>
+      <div class="cv-row cv-row-tight"><div class="cv-period">2026</div><div><div class="cv-role">Invention of the Year Award Finalist (Quantum Category)</div><div class="cv-org">University of Maryland</div></div></div>
+      <div class="cv-row cv-row-tight"><div class="cv-period">2026</div><div><div class="cv-role">Outstanding Graduate Assistant Award</div><div class="cv-org">University of Maryland</div></div></div>
+	  <div class="cv-row cv-row-tight"><div class="cv-period">2026</div><div><div class="cv-role">NSF I-Corps</div><div class="cv-org">National Science Foundation</div></div></div>
+      <div class="cv-row cv-row-tight"><div class="cv-period">2026</div><div><div class="cv-role">Nanophotonics Best Poster Award</div><div class="cv-org">European Physical Society (EPS) NANOMETA</div></div></div>
+      <div class="cv-row cv-row-tight"><div class="cv-period">2021</div><div><div class="cv-role">Dean's Fellowship</div><div class="cv-org">University of Maryland</div></div></div>
+      <div class="cv-row cv-row-tight"><div class="cv-period">2020</div><div><div class="cv-role">WIN Nanofellowship</div><div class="cv-org">Waterloo Institute for Nanotechnology</div></div></div>
+      <div class="cv-row cv-row-tight"><div class="cv-period">2020</div><div><div class="cv-role">Faculty of Engineering Award</div><div class="cv-org">University of Waterloo</div></div></div>
+      <div class="cv-row cv-row-tight"><div class="cv-period">2019</div><div><div class="cv-role">International Masters Student Award</div><div class="cv-org">University of Waterloo</div></div></div>
+      <div class="cv-row cv-row-tight"><div class="cv-period">2019</div><div><div class="cv-role">Graduate Research Studentship (GRS)</div><div class="cv-org">University of Waterloo</div></div></div>
+      <div class="cv-row cv-row-tight"><div class="cv-period">2018</div><div><div class="cv-role">Charpak Masters Scholarship (Declined)</div><div class="cv-org">Government of France</div></div></div>
+      <div class="cv-row cv-row-tight"><div class="cv-period">2017</div><div><div class="cv-role">CNRS Internship Scholarship</div><div class="cv-org">Laboratoire Kastler Brossel (LKB), Paris, France</div></div></div>
     </div>
 
     <div class="cv-sec">
